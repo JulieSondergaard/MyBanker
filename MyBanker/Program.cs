@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MyBanker
 {
@@ -9,34 +10,23 @@ namespace MyBanker
             Person jules = new Person("Julie", 34);
 
             Account account = new Account(jules);
-           account.GenerateAccountNumber();
+
             
+
             Visa visa = new Visa(account, jules);
             DebetCard debetCard = new DebetCard(account, jules);
+            Maestro maestro = new Maestro(account, jules);
 
-            if (debetCard is DebetCard)
+            List<PaymentCard> cards = new List<PaymentCard>() {visa, debetCard, maestro };
+
+
+            foreach (PaymentCard card in cards)
             {
-                debetCard.GenerateCardNumber();
-                Console.WriteLine($"Debet card:\n{debetCard.PrintCardInformation()}");
+                Console.WriteLine($"{card.GetType().Name}:\n{card.PrintCardInformation()}\n");
             }
-
-            Console.WriteLine();
-            
-            if (visa is Visa)
-            {
-                if (visa.HasExpiration())
-                {
-                    visa.CreateExpiryDate();
-                }
-                visa.GenerateCardNumber();
-                Console.WriteLine($"Visa:\n{visa.PrintCardInformation()}");
-            }
-            
-
-            
-             
-
-            
+           
+           
         }
+
     }
 }

@@ -12,7 +12,7 @@ namespace MyBanker
         protected string accountNumber;
         protected string regNumber = "3520";
         private string generatedNumber;
-        List<PaymentCard> cards = new List<PaymentCard>();
+        
         Person person;
 
         public string AccountNumber
@@ -30,6 +30,7 @@ namespace MyBanker
         public Account(Person person)
         {
             this.person = person;
+            GenerateAccountNumber();
         }
 
         public string GenerateAccountNumber()

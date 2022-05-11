@@ -8,9 +8,10 @@ namespace MyBanker
 {
    public abstract class PaymentCard
     {
-        Random random = new Random();
+        protected Random random = new Random();
         protected string cardNumber;
-        protected string prefix;
+        protected string[] prefix;
+        protected string expiryDate;
         protected string generatedNumber;
         protected int generatedNumberLength;
         Account account;
@@ -31,9 +32,21 @@ namespace MyBanker
 
         public abstract string GenerateCardNumber();
 
-        public abstract string PrintCardInformation();
+        public virtual string PrintCardInformation() 
+        {
+            string PrintCardInformation =
+                $"Card number: {cardNumber}\n" +
+                $"Name: {person.Name}\n" +
+                $"Expiry: {expiryDate}\n" +
+                $"Account number: {account.AccountNumber}\n" +
+                $"Registration number: {account.RegNumber}";
+
+            return PrintCardInformation;
+        }
+
+    }
        
         
 
-    }
+    
 }

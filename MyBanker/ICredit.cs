@@ -8,7 +8,6 @@ namespace MyBanker
 {
     interface ICredit
     {
-        public bool AllowCredit();
 
         public int GetMaximumCreditAmount();
     }

@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace MyBanker
 {
-    public class Visa : PaymentCard, IExperiation, IInternational, ICredit
+    public class Maestro : PaymentCard, IExperiation, IInternational
     {
-   
 
 
-        public Visa(Account account, Person person): base(account, person)
+
+
+        public Maestro(Account account, Person person) : base(account, person)
         {
-            prefix = new string[] { "4" };
             generatedNumberLength = 15;
-            CreateExpiryDate();
+            prefix = new string[] { "5018", "5020", "5038", "5893", "6304", "6759", "6761", "6762", "6763"};
             GenerateCardNumber();
+            CreateExpiryDate();
+
         }
-
-
+        
         public bool AllowInternationalUsage()
         {
             return true;
@@ -29,26 +30,19 @@ namespace MyBanker
 
         public string CreateExpiryDate()
         {
-            
             DateTime currentDate = DateTime.UtcNow;
-            DateTime fiveYearsFromNow = currentDate.AddYears(5);
-            expiryDate = fiveYearsFromNow.ToString("MM/yy", CultureInfo.InvariantCulture);
-            
+            DateTime expiry = currentDate.AddYears(5).AddMonths(8);           
+            expiryDate = expiry.ToString("MM/yy", CultureInfo.InvariantCulture);
+
             return expiryDate;
-            
         }
-
-
-
-        public int GetMaximumCreditAmount()
-        {
-            return 20000;
-        }
-
 
         public override string GenerateCardNumber()
         {
-            cardNumber = prefix[0];
+            int rnd = random.Next(0, prefix.Length);
+
+            cardNumber = prefix[rnd];
+
             for (int i = 0; i < generatedNumberLength; i++)
             {
                 generatedNumber += random.Next(0, 10);
@@ -58,9 +52,6 @@ namespace MyBanker
 
             return cardNumber;
         }
-
-
-
 
     }
 }

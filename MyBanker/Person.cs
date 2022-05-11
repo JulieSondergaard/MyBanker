@@ -8,11 +8,9 @@ namespace MyBanker
 {
     public class Person
     {
+
         private string name;
         private int age;
-        private List<Account> accounts = new List<Account>();
-        
-
 
         public string Name
         {
@@ -24,12 +22,6 @@ namespace MyBanker
         {
             get { return age; }
             set { age = value; }
-        }
-
-        public List<Account> Accounts
-        {
-            get { return accounts; }
-            set { accounts = value; }
         }
 
         public Person(string name, int age)
